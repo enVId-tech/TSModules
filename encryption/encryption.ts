@@ -1,5 +1,5 @@
-import crypto from 'crypto';
-import bcrypt from 'bcrypt';
+import crypto from "crypto";
+import bcrypt from "bcrypt";
 
 const encryptionKey: Buffer = crypto.scryptSync('passphrase', 'salt', 32); // Deriving a secure encryption key using scrypt
 const iv: Buffer = crypto.randomBytes(16); // 16 bytes for AES-256-GCM

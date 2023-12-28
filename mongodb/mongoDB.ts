@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { Collection, Db, DeleteResult, Filter, MongoClient, UpdateResult } from 'mongodb';
-import { CLIENT_DB, URI } from './env.ts';
+import { Collection, Db, DeleteResult, Filter, MongoClient, UpdateResult } from "mongodb";
+import { CLIENT_DB, URI } from "./env.ts";
 
 const client: MongoClient = new MongoClient(URI);
 
@@ -143,10 +143,8 @@ async function deleteFromDatabase(
     const database: Db = client.db(CLIENT_DB);
     const collection: Collection<Document> = database.collection(collectionName);
 
-    let result: DeleteResult;
-
     if (type === 1 || type === "one") {
-      result = await collection.deleteOne(filter);
+      const result: DeleteResult = await collection.deleteOne(filter);
 
       if (log && result.deletedCount === 0) {
         console.log("\x1b[32m", "No documents deleted");
@@ -158,7 +156,7 @@ async function deleteFromDatabase(
 
       return result.deletedCount;
     } else if (type === 2 || type === "many") {
-      const result = await collection.deleteMany(filter);
+      const result: DeleteResult = await collection.deleteMany(filter);
 
       if (log && result.deletedCount === 0) {
         console.log("\x1b[32m","No documents deleted");
@@ -180,7 +178,6 @@ async function deleteFromDatabase(
     throw new Error(error as string);
   }
 }
-
 
 /**
  * 
