@@ -7,7 +7,7 @@ const client: MongoClient = new MongoClient(URI);
 /**
  * Connects to the MongoDB database
  * 
- * @param log Whether to log the database connection status
+ * @param {boolean} log Whether to log the database connection status
  * @returns void
  * @throws Error if an error occurs
  */
@@ -27,7 +27,7 @@ async function connectToDatabase(log?: boolean): Promise<void> {
 /**
  * Disconnects from the MongoDB database
  * 
- * @param log Whether to log the database connection status
+ * @param {boolean} log Whether to log the database connection status
  * @returns void
  * @throws Error if an error occurs
  */
@@ -47,9 +47,9 @@ async function disconnectFromDatabase(log?: boolean): Promise<void> {
 /**
  * Write data to the database collection.
  *
- * @param data Data to be written to the database
- * @param collectionName Name of the collection to write to
- * @param log Whether to log the database connection status
+ * @param {object} data Data to be written to the database
+ * @param {string} collectionName Name of the collection to write to
+ * @param {boolean} log Whether to log the database connection status
  * @returns The ID of the inserted document
  * @returns Inserted boolean (T/F)
  * @throws CustomError if an error occurs
@@ -86,9 +86,9 @@ async function writeToDatabase(
 }
 /**
  * @param filter The filter to use when modifying
- * @param update The update object containing the fields to modify
- * @param collectionName The name of the collection to modify
- * @param log (optional) Set to true to log modification messages
+ * @param {any} update The update object containing the fields to modify
+ * @param {string} collectionName The name of the collection to modify
+ * @param {boolean} log (optional) Set to true to log modification messages
  * @returns The number of documents modified
  * @throws Error if an error occurs
  */
@@ -125,9 +125,9 @@ async function modifyInDatabase(
 
 /**
  * @param filter The filter to use when deleting
- * @param collectionName The name of the collection to delete from
- * @param type The type of delete to perform (1 = one, 2 = many)
- * @param log (optional) Set to true to log deletion messages
+ * @param {string} collectionName The name of the collection to delete from
+ * @param {number} type The type of delete to perform (1 = one, 2 = many)
+ * @param {boolean} log (optional) Set to true to log deletion messages
  * @returns The number of documents deleted, or undefined if no documents were deleted
  * @throws Error if an error occurs
  */
@@ -181,8 +181,8 @@ async function deleteFromDatabase(
 
 /**
  * 
- * @param collectionName The name of the collection to get items from
- * @param dataId The ID of the data to get from the database
+ * @param {string} collectionName The name of the collection to get items from
+ * @param {number} dataId The ID of the data to get from the database
  * @returns Returns the items from the database as a JSON string
  * @throws Error if an error occurs
  */
@@ -210,7 +210,7 @@ async function getItemsFromDatabase(
 
     return JSON.stringify(items);
   } catch (error: any) {
-    console.error("\x1b[31m", `Error getting items from database:, ${<string>error}`);
+    console.error("\x1b[31m", `Error getting items from database:, ${error}`);
     throw new Error(error);
   }
 }
@@ -223,3 +223,4 @@ const mongoDBFuncs = {
 };
 
 export default mongoDBFuncs;
+export { writeToDatabase, modifyInDatabase, getItemsFromDatabase, deleteFromDatabase }

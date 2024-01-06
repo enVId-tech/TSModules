@@ -21,7 +21,7 @@ function generateRandomNumber(numberOfDigits: number, type: GenerationType): str
     const digits: string = '0123456789';
     const characters: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     const alphanumeric: string = digits + characters;
-    let validCharacters = '';
+    let validCharacters: string = '';
     switch (type) {
       case 'number':
         validCharacters = digits;
@@ -170,6 +170,11 @@ function encryptIP(ip: string): string {
   }
 }
 
+/**
+ * Decrypts the IP address
+ * @param {string} encryptedIP - Encrypted IP address
+ * @returns {string} - Decrypted IP address
+ */
 function decryptIP(encryptedIP: string): string {
   try {
     const match: RegExpMatchArray | null = encryptedIP.match(/.{1,2}/g);
@@ -194,3 +199,4 @@ const encrypts = {
 };
 
 export default encrypts
+export { generateRandomNumber, encryptPassword, comparePassword, encryptData, decryptData, encryptIP, decryptIP, permanentEncryptPassword }
