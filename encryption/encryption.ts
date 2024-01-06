@@ -170,6 +170,17 @@ function encryptIP(ip: string): string {
   }
 }
 
+function decryptIP(encryptedIP: string): string {
+  try {
+    const match: RegExpMatchArray | null = encryptedIP.match(/.{1,2}/g);
+    const ip: string = match ? match.map(part => parseInt(part, 16)).join('.') : '';
+    return ip;
+  } catch (error: any) {
+    console.error("\x1b[31m", error as string);
+    throw new Error(error);
+  }
+}
+
 // Export all the functions as a single object with a common name
 const encrypts = {
   generateRandomNumber,
@@ -178,6 +189,7 @@ const encrypts = {
   encryptData,
   decryptData,
   encryptIP,
+  decryptIP,
   permanentEncryptPassword,
 };
 
